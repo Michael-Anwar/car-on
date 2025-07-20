@@ -4,7 +4,7 @@ import React, { createContext, useContext, useState, useEffect } from "react";
 
 interface AuthContextProps {
   isLoggedIn: boolean;
-  user: User | null; // Allow null for initial state
+  user: User | null;
   login: (userData: User, token: string) => void;
   logout: () => void;
 }
@@ -12,16 +12,16 @@ interface AuthContextProps {
 const AuthContext = createContext<AuthContextProps | undefined>(undefined);
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
-  const [user, setUser] = useState<User | null>(null); // Ensure it's of type User | null
+  const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
     if (storedUser) {
-      setUser(JSON.parse(storedUser) as User); // Ensure storedUser is parsed as User
+      setUser(JSON.parse(storedUser) as User);
     }
   }, []);
 
-  const login = (userData: User, token: string) => { // Ensure userData is of type User
+  const login = (userData: User, token: string) => {
     setUser(userData);
     localStorage.setItem("token", token);
     localStorage.setItem("user", JSON.stringify(userData));

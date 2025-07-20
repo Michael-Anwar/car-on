@@ -5,18 +5,18 @@ import BrandsSection from "../components/ui/Home/BrandsSection";
 import ExploreSection from "../components/ui/Home/ExploreSection";
 import ServicesSection from "../components/ui/Home/ServicesSection";
 import TestimonialSection from "../components/ui/Home/TestimonialSection";
+import LoginToaster from "../components/ui/LoginToaster";
 
 export default function Home() {
-  //   console.log("what am I doing here ? -- client/server");
-
   return (
     <>
+      <LoginToaster />
       <Main />
       <WorksSection />
       <BrandsSection />
       <ExploreSection />
       <ServicesSection />
-      <TestimonialSection/>
+      <TestimonialSection />
     </>
   );
 }

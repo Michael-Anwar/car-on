@@ -3,21 +3,20 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useRouter } from "next/navigation";
-import { useAuth } from "@/app/context/AuthContext"; // adjust the path as needed
+import { useAuth } from "@/app/context/AuthContext";
+import { toast } from "react-hot-toast";
 
 const LoginForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  
+
   const router = useRouter();
   const { login } = useAuth();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setError("");
     setLoading(true);
 
     try {
@@ -26,18 +25,19 @@ const LoginForm = () => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
       });
-      
       const data = await res.json();
+
       if (!res.ok) {
-        setError(data.error || "Login failed");
+        toast.error(data.error || "Login failed");
       } else {
-        // Call the login function from context to update the auth state
+        // update your auth context
         login(data.user, data.token);
+        localStorage.setItem("loginSuccess", "true");
         router.push("/");
       }
     } catch (err: unknown) {
       console.error("Login error:", err);
-      setError("Login failed. Please try again later.");
+      toast.error("Login failed. Please try again later.");
     } finally {
       setLoading(false);
     }
@@ -49,13 +49,13 @@ const LoginForm = () => {
         <label htmlFor="email">Enter Email</label>
         <input
           id="email"
-          type="text"
+          type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
         />
       </div>
-      <div className="inputContainer">
+      <div className="inputContainer relative">
         <label htmlFor="password">Password</label>
         <input
           id="password"
@@ -67,6 +67,7 @@ const LoginForm = () => {
         <button
           type="button"
           onClick={() => setShowPassword(!showPassword)}
+          className="absolute right-2 top-1/2 transform -translate-y-1/2"
           aria-label={showPassword ? "Hide password" : "Show password"}
         >
           {showPassword ? <FaEye /> : <FaEyeSlash />}
@@ -78,15 +79,15 @@ const LoginForm = () => {
           Remember me
         </label>
       </div>
-      {error && <p className="text-red-500">{error}</p>}
       <input
         className="input bg-brandColor text-white py-2 rounded cursor-pointer"
         type="submit"
         value={loading ? "Signing In..." : "Sign In"}
+        disabled={loading}
       />
       <div className="text-xl text-center mt-2">
         Don&apos;t have an account?{" "}
-        <Link href="signup" className="text-brandColor underline">
+        <Link href="/signup" className="text-brandColor underline">
           Sign Up
         </Link>
       </div>

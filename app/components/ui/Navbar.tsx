@@ -41,7 +41,7 @@ const Navbar = () => {
           : "bg-background sticky rounded-none shadow-lg p-3 mb"
       }`}
     >
-      <div className="Container w-full">
+      <div className="Container w-full relative">
         <nav className="flex justify-between items-center my-3">
           <Link
             href="/"
@@ -118,7 +118,7 @@ const Navbar = () => {
             isresponsiveLinks
               ? "max-h-[400px] mb-4"
               : "max-h-0 overflow-hidden "
-          } transition-scale duration-500 ease-linear md:m-0 md:scale-0 md:h-0 `}
+          }  md:m-0 md:scale-0 md:h-0 absolute w-full `}
         >
           <ul className=" flex flex-col justify-start gap-3 ">
             {links.map((link) => (

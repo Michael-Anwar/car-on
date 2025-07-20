@@ -129,7 +129,7 @@ const ServicesSection = () => {
                 very helpful while traveling.
               </p>
               <Link
-                href={"/"}
+                href={"/blogs"}
                 className="text-white bg-brandColor px-4 py-3 font-medium rounded-md my-6 inline-block"
               >
                 View All Posts

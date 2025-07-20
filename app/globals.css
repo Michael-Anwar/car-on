@@ -3,9 +3,6 @@
 @tailwind utilities;
 @plugin "@tailwindcss/typography";
 
-
-
-
 /*------------------------------------------------
   Global Styles
 ------------------------------------------------*/
@@ -22,9 +19,9 @@
   }
   .scroll-container {
     overflow-x: scroll;
-  scroll-snap-type: x mandatory;
+    scroll-snap-type: x mandatory;
   }
-  
+
   .scroll-item {
     scroll-snap-align: center;
   }
@@ -304,7 +301,6 @@
   color: rgb(var(--brandColor));
 }
 
-
 /* Car Details Component */
 .cardetails {
   display: flex;
@@ -519,8 +515,49 @@
   }
 }
 
+/* Add new car */
+
+.info-section {
+  padding: 30px;
+  background-color: rgb(var(--background));
+  border-radius: 20px;
+
+  .info-heading {
+    font-size: 2rem;
+    background-color: rgb(var(--bglight));
+    padding: 10px 30px;
+    border-radius: 15px;
+    margin-bottom: 20px;
+  }
+ 
+  .inputs-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px 60px;
+
+    .input-container {
+      display: flex;
+      flex-direction: column;
+      label{
+        margin-left: 5px;
+        margin-bottom: 5px;
+      }
+      input {
+        border: 1px solid gray;
+        min-height: 40px;
+        border-radius: 10px;
+        padding: 10px 20px;
+        outline: none;
+        &:focus {
+          border: 1px solid rgb(var(--brandColor));
+        }
+      }
+    }
+  }
+}
+
 /*------------------------------------------------
-  Animations & Keyframes
+Animations & Keyframes
 ------------------------------------------------*/
 @keyframes fixedNav-light {
   100% {
